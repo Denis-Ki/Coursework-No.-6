@@ -1,0 +1,22 @@
+{% extends 'clients/base.html'%}
+{% load something %}
+{% block content %}
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow-sm" style="max-width: 800px; width: 100%;">
+        <div class="cart-header bg-secondary text-white p-2 rounded-top text-center">
+            Просмотры: {{ blog.count_view }}
+        </div>
+        <div class="card-body">
+            <h1 class="jumbotron-heading text-center">{{ blog.title }}</h1>
+            <img class="card-img-top my-3" src="{% mymedia blog.image %}" alt="Изображение статьи">
+            <div class="content">
+                <h5 class="text-justify">{{ blog.content }}</h5>
+            </div>
+            <div class="card-footer text-center">
+                <h5 class="text-justify">дата публикации: {{ blog.created_at }}</h5>
+            </div>
+            <a class="btn btn-outline-primary btn-block mb-2" href="{% url 'clients:index' %}" role="button">Назад</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

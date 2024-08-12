@@ -1,0 +1,29 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+{% for massage in object_list %}
+<div class="card">
+    <div class="cart-header bg-secondary text-white p-3 rounded shadow-sm text-center">сообщения</div>
+    <div class="card-body">
+        <form method="post">
+
+            <div class="form-group">
+
+                <h3><label>Имя</label>: {{ massage.subject }}</h3>
+                <h6><label>Коментарий</label>: {{ massage.massage|slice:":100" }}{% if massage.massage|length > 100 %}...{% endif %}</h6>
+
+                {% if user == massage.owner or user.is_superuser %}
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'message:message_detail' massage.pk %}">детали сообщения</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'message:message_update' massage.pk %}">обновление данных </a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'message:message_delete' massage.pk %}">удалить </a>
+                {% endif %}
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

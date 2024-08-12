@@ -1,0 +1,26 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+{% for email_message in object_list %}
+<div class="card">
+    <div class="cart-header"></div>
+    <div class="card-body">
+        <form method="post">
+
+            <div class="form-group">
+                <h3>Рассылка</h3>
+                <h6>Название рассылки: {{ mailing.name }}</h6>
+                <h6>Статус: {{ mailing.status }}</h6>
+                <h6>Время рассылки: {{ mailing.next_send_time }}</h6>
+
+                {% if user == mailing.owner or user.is_superuser %}
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_detail' mailing.pk %}">детали рассылки</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_update' mailing.pk %}">обновление рассылки</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_delete' mailing.pk %}">удалить</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}

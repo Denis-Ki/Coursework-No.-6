@@ -5,10 +5,12 @@ from django.core.management import BaseCommand
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        subject = 'text message'
-        message = 'Это тестовое письмо, отправленное с помощью Django и Яндекс SMTP-сервера.'
+        subject = "text message"
+        message = (
+            "Это тестовое письмо, отправленное с помощью Django и Яндекс SMTP-сервера."
+        )
         from_email = settings.DEFAULT_FROM_EMAIL
-        to_email = 'www.wolk94@gmail.com'
+        to_email = "duzzz@gbk.ru"
 
         send_mail(
             subject,
@@ -18,4 +20,4 @@ class Command(BaseCommand):
             fail_silently=False,
         )
 
-        self.stdout.write(self.style.SUCCESS('Email sent successfully!'))
+        self.stdout.write(self.style.SUCCESS("Email sent successfully!"))

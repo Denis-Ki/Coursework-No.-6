@@ -1,0 +1,33 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+{% for log in object_list %}
+<div class="card">
+    <div class="cart-header"></div>
+    <div class="card-body">
+        <form method="post">
+
+            <div class="form-group">
+                <h3>Статус попытки рассылки</h3>
+                <h6>Название рассылки: {{ log.mailing.name}}</h6>
+                <h6>Время попытки : {{ log.time }}</h6>
+                <h6>Статус попытки: {{ log.status}}</h6>
+                <h6>Ответ сервера: {{ log.server_response}}</h6>
+
+
+                <a class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:index' %}"
+                   role="button">Назад</a>
+                {% if user == mailing.owner or user.is_superuser %}
+
+
+                {% endif %}
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
