@@ -8,14 +8,15 @@ class BlogDetailView(DetailView):
     """
     Контроллер отображения блога
     """
+
     model = Blog
-    template_name = 'blog/blog_detail.html'
+    template_name = "blog/blog_detail.html"
 
     def get_object(self, queryset=None):
         object = super().get_object(queryset)
 
         object.views_count += 1
-        object.save(update_fields=['count_view'])
+        object.save(update_fields=["views_count"])
 
         return object
 

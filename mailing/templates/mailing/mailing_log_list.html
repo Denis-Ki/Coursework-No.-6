@@ -1,5 +1,12 @@
 {% extends 'mailing/base.html' %}
 {% block content %}
+
+<section class="py-1 text-center container">
+    <h3 class="fw-light "> Лог рассылок</h3>
+
+    <a class="btn btn-primary my-2" href="{% url 'mailing:mailing_list' %}">Рассылка</a></li>
+
+</section>
 {% for log in object_list %}
 <div class="card">
     <div class="cart-header"></div>
@@ -13,21 +20,12 @@
                 <h6>Статус попытки: {{ log.status}}</h6>
                 <h6>Ответ сервера: {{ log.server_response}}</h6>
 
-
-                <a class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:index' %}"
-                   role="button">Назад</a>
-                {% if user == mailing.owner or user.is_superuser %}
-
-
-                {% endif %}
-
+                <a class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_list' %}" role="button">Назад</a>
             </div>
-
 
         </form>
     </div>
 </div>
 
 {% endfor %}
-
 {% endblock %}

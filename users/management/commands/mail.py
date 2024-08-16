@@ -10,7 +10,7 @@ class Command(BaseCommand):
             "Это тестовое письмо, отправленное с помощью Django и Яндекс SMTP-сервера."
         )
         from_email = settings.DEFAULT_FROM_EMAIL
-        to_email = "duzzz@gbk.ru"
+        to_email = "duzzz@bk.ru"
 
         send_mail(
             subject,

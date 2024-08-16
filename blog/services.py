@@ -11,7 +11,7 @@ def get_blog_from_cache():
     if not CACHE_ENABLED:
         return Blog.objects.filter(is_active=True)
     else:
-        key = 'blog_list'
+        key = "blog_list"
         articles = cache.get(key)
         if articles is not None:
             return articles

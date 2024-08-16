@@ -1,9 +1,10 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
-from users.views import RegisterView, ProfileView, verify_email, reset_password
+from users.apps import UsersConfig
+from users.views import RegisterView, ProfileView, reset_password, verify_email
 
-app_name = "users"
+app_name = UsersConfig.name
 
 urlpatterns = [
     path("", LoginView.as_view(template_name="users/login.html"), name="login"),

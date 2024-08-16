@@ -1,34 +1,33 @@
 import smtplib
 from config import settings
-from email_massages.models import EmailMessage
 from django.core.management import BaseCommand
 from django.core.mail import send_mail
 
-from logi.models import Logi
+from mailing.models import Mailing, MailingLog
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        emailmessages = EmailMessage.objects.filter(status="Запущена")
-        for email_message in emailmessages:
-            clients = email_message.clients.all()
+        mailings = Mailing.objects.filter(status="Запущена")
+        for mailing in mailings:
+            clients = mailing.clients.all()
             try:
                 server_response = send_mail(
-                    subject=email_message.message.subject,
-                    message=email_message.message.message,
+                    subject=mailing.message.subject,
+                    message=mailing.message.message,
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[client.email for client in clients],
                     fail_silently=False,
                 )
-                Logi.objects.create(
-                    status=Logi.SUCCESS,
+                MailingLog.objects.create(
+                    status=MailingLog.SUCCESS,
                     server_response=server_response,
-                    email_message=email_message,
+                    mailing=mailing,
                 )
             except smtplib.SMTPException as e:
-                Logi.objects.create(
-                    status=Logi.FAIL,
+                MailingLog.objects.create(
+                    status=MailingLog.FAIL,
                     server_response=str(e),
-                    email_message=email_message,
+                    mailing=mailing,
                 )
                 print(f"Ошибка при отправке письма: {str(e)}")

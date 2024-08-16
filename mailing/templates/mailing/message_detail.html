@@ -5,13 +5,12 @@
     <div class="card shadow-sm">
         <div class="cart-header bg-secondary text-white p-3 rounded-top text-center">Информация о сообщении</div>
         <div class="card-body">
-            <h1 class="jumbotron-heading">Информация о клиенте</h1>
             <div class="row">
                 <div class="col-12">
                     <p class="card-text">Заголовок: {{ message.subject }}</p>
-                    <p class="card-text">Сообщение: {{ message.message|slice:":100" }}{% if massage.massage|length > 100 %}...{% endif %}</p>
+                    <p class="card-text">Сообщение: {{ message.message }}</p>
 
-                    <a href="{% url 'message:message' %}" class="btn btn-outline-primary btn-block mb-2">Назад</a>
+                    <a href="{% url 'mailing:message_list' %}" class="btn btn-outline-primary btn-block mb-2">Назад</a>
                 </div>
             </div>
         </div>

@@ -1,21 +1,28 @@
 {% extends 'mailing/base.html' %}
 {% block content %}
+
+<section class="py-1 text-center container">
+    <h1 class="fw-light "> Клиенты</h1>
+    <a class="btn btn-primary my-2" href="{% url 'mailing:client_create' %}">Новый клиент</a></li>
+    <a class="btn btn-primary my-2" href="{% url 'mailing:mailing_list' %}">Рассылка</a></li>
+    <a class="btn btn-primary my-2" href="{% url 'mailing:message_list' %}">Сообщения</a></li>
+</section>
 {% for client in object_list %}
 <div class="card">
-    <div class="cart-header bg-secondary text-white p-3 rounded shadow-sm text-center">КЛИЕНТ</div>
+    <div class="cart-header bg-secondary text-white p-3 rounded shadow-sm text-center">Клиент</div>
     <div class="card-body">
         <form method="post">
 
             <div class="form-group">
 
-                <h3><label>Имя</label>: {{ client.name }}</h3>
+                <h5><label>Имя</label>: {{ client.name }}</h5>
                 <h6><label>Email</label>: {{ client.email}}</h6>
                 <h6><label>Коментарий</label>: {{ client.comments|slice:":100" }}{% if client.comments|length > 100 %}...{% endif %}</h6>
 
                 {% if user == client.owner or user.is_superuser %}
-                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'clients:client_detail' client.pk %}">детали клиента</a>
-                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'clients:client_update' client.pk %}">обновление данных клиента</a>
-                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'clients:client_delete' client.pk %}">удалить клиента</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:client_detail' client.pk %}">детали клиента</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:client_update' client.pk %}">обновление данных клиента</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:client_delete' client.pk %}">удалить клиента</a>
                 {% endif %}
 
             </div>

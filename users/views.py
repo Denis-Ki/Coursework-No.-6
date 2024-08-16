@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
+from config.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 from django.core.mail import send_mail
@@ -94,8 +95,3 @@ def generate_random_password(length=12, include_special_chars=True):
 
     password = "".join(secrets.choice(characters) for i in range(length))
     return password
-
-
-from django.shortcuts import render
-
-# Create your views here.

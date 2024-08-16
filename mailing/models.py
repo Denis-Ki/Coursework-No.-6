@@ -40,7 +40,9 @@ class Message(models.Model):
     message = models.TextField(
         verbose_name="Сообщение", help_text="введите текст сообщения"
     )
-    owner = models.ForeignKey(User, verbose_name='Владелец', on_delete=models.SET_NULL, **NULLABLE)
+    owner = models.ForeignKey(
+        User, verbose_name="Владелец", on_delete=models.SET_NULL, **NULLABLE
+    )
 
     def __str__(self):
         return self.subject

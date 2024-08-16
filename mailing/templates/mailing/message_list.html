@@ -1,20 +1,27 @@
 {% extends 'mailing/base.html' %}
 {% block content %}
-{% for massage in object_list %}
+<section class="py-1 text-center container">
+    <h1 class="fw-light "> Сообщения</h1>
+    <a class="btn btn-primary my-2" href="{% url 'mailing:message_create' %}">Новое сообщение</a></li>
+    <a class="btn btn-primary my-2" href="{% url 'mailing:mailing_list' %}">Рассылка</a></li>
+    <a class="btn btn-primary my-2" href="{% url 'mailing:clients_list' %}">Клиенты</a></li>
+</section>
+
+{% for message in object_list %}
 <div class="card">
-    <div class="cart-header bg-secondary text-white p-3 rounded shadow-sm text-center">сообщения</div>
+    <div class="cart-header bg-secondary text-white p-3 rounded shadow-sm text-center">Cообщение</div>
     <div class="card-body">
         <form method="post">
 
             <div class="form-group">
 
-                <h3><label>Имя</label>: {{ massage.subject }}</h3>
-                <h6><label>Коментарий</label>: {{ massage.massage|slice:":100" }}{% if massage.massage|length > 100 %}...{% endif %}</h6>
+                <h5><label>Тема</label>: {{ message.subject }}</h5>
+                <h6><label>Содержание</label>: {{ message.message|slice:":100" }}{% if message.message|length > 100 %}...{% endif %}</h6>
 
-                {% if user == massage.owner or user.is_superuser %}
-                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'message:message_detail' massage.pk %}">детали сообщения</a>
-                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'message:message_update' massage.pk %}">обновление данных </a>
-                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'message:message_delete' massage.pk %}">удалить </a>
+                {% if user == message.owner or user.is_superuser %}
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:message_detail' message.pk %}">детали сообщения</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:message_update' message.pk %}">обновление данных </a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:message_delete' message.pk %}">удалить </a>
                 {% endif %}
 
             </div>
