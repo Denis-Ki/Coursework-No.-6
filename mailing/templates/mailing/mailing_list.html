@@ -1,0 +1,44 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<section class="px-3 py-1 pt-md-1 pb-md-4 mx-auto text-center " xmlns="http://www.w3.org/1999/html">
+    <div class="container-center">
+        <h1 class="fw-light "> Рассылка </h1>
+                <a class="btn btn-primary my-2" href="{% url 'mailing:mailing_create' %}">Новая Рассылка</a></li>
+                <a class="btn btn-primary my-2" href="{% url 'mailing:clients_list' %}">Клиенты</a></li>
+                <a class="btn btn-primary my-2" href="{% url 'mailing:message_list' %}">Сообщения</a></li>
+    </div>
+</section>
+
+{% for mailing in object_list %}
+<div class="card">
+    <div class="cart-header"></div>
+    <div class="card-body">
+        <form method="post">
+
+            <div class="form-group">
+                <h3>Рассылка</h3>
+                <h6>Название рассылки: {{ mailing.name }}</h6>
+                <h6>Статус: {{ mailing.status }}</h6>
+                <h6>Время рассылки: {{ mailing.next_send_time }}</h6>
+
+                {% if user == mailing.owner or user.is_superuser %}
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_detail' mailing.pk %}">детали рассылки</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_update' mailing.pk %}">обновление рассылки</a>
+                <a type="submit" class="btn btn-outline-primary btn-block mb-2" href="{% url 'mailing:mailing_delete' mailing.pk %}">удалить</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endfor %}
+
+<div class="container">
+    <p class="float-end mb-1">
+      <a href="{% url 'mailing:mailing_log_list' %}" >Лог рассылок</a>
+    </p>
+
+</div>
+
+
+{% endblock %}

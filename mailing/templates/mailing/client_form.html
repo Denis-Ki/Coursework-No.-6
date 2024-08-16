@@ -1,0 +1,15 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<div class="card">
+<div class="cart-header">Зарегистрировать</div>
+<div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">клиент</button>
+    </form>
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+{% load my_tags %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <section class="py-5 text-center container">
+            <h1 class="fw-light "> Блог </h1>
+            <p class="lead text-body-secondary">Статьи нашего блога</p>
+        </section>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {%for blogs in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <h5 class="card text-center"> {{ blogs.title }}</h5>
+                    <img src={{ blogs.preview | mymedia}} height="300">
+                    <div class="card-body">
+
+                        <p class="card-text"> {{ blogs.content|truncatechars:100}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{% url 'blog:blog_detail' blogs.pk %}" role="button">
+                                    Читать</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  </div>
+    {% endblock %}

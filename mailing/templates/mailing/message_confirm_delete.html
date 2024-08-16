@@ -1,0 +1,21 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+
+<div class="card">
+<div class="cart-header">Удаление сообщения</div>
+<div class="card-body">
+    <form method="post">
+
+        <div class="form-group">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">удалить</button>
+        </div>
+
+
+    </form>
+</div>
+</div>
+
+
+
+{% endblock %}
